@@ -39,3 +39,21 @@ async function fetchWeatherAlerts(state) {
     errorMessage.classList.remove("hidden");
   }
 } // i love try/catch, its the goat
+
+// update the DOM with alert data
+function displayAlerts(data) {
+  // clear previous results
+  alertsDisplay.innerHTML = "";
+ 
+  // summary line showing total alert count
+  const summary = document.createElement("p");
+  summary.textContent = `Weather Alerts: ${data.features.length}`;
+  alertsDisplay.appendChild(summary);
+ 
+  // render each alert headline as its own paragraph
+  data.features.forEach((feature) => {
+    const p = document.createElement("p");
+    p.textContent = feature.properties.headline;
+    alertsDisplay.appendChild(p);
+  });
+}
