@@ -12,6 +12,12 @@ const errorMessage = document.getElementById("error-message");
 button.addEventListener("click", async () => {
   const state = input.value.trim();
 
+  if (!/^[A-Z]{2}$/.test(state)) {
+    errorMessage.textContent = "Please enter a valid two-letter state abbreviation (e.g. CA, TX).";
+    errorMessage.classList.remove("hidden");
+    input.value = "";
+    return; // stop fetch request
+  }  
   input.value = "";
 
   await fetchWeatherAlerts(state);
